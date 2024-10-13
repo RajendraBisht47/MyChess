@@ -1,0 +1,22 @@
+.maincontainer {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(204, 249, 234);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.containerBox {
+  margin-top: 50px;
+  text-decoration: none;
+}
+
+.close {
+  background: transparent;
+  border: none;
+  margin-left: 10px;
+}
