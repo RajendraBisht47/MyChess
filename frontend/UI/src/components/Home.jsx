@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import "./css/Home.css";
 
-export const socket = io("http://localhost:8001");
+export const socket = io("https://mychess-x9y2.onrender.com");
 
 function Home() {
   const { data, getUserData, room, setRoom } = useContext(ContextUser);
