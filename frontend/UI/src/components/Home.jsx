@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import "./css/Home.css";
 
-export const socket = io("https://mychess-x9y2.onrender.com");
+export const socket = io("http://localhost:8001");
 
 function Home() {
   const { data, getUserData, room, setRoom } = useContext(ContextUser);
@@ -86,11 +86,15 @@ function Home() {
         </div>
       ) : null}
       <Link className="containerBox" to={"/onlineplayer"}>
-        <div className="card mb-3" style={{ width: "350px" }}>
-          <div className="row g-0">
+        <div className="card  componnet1">
+          <div className="componnet">
             <div className="col-md-4">
               <img
-                style={{ padding: "5px" }}
+                style={{
+                  margin: "5px",
+                  height: "100px",
+                  width: "100px",
+                }}
                 src="/friend.png"
                 className="img-fluid rounded-start"
                 alt="Invite Friend"
@@ -105,11 +109,15 @@ function Home() {
           </div>
         </div>
       </Link>
-      <Link className="containerBox">
-        <div className="card mb-3" style={{ width: "350px" }}>
-          <div className="row g-0">
+      <Link className="containerBox" to={"/gameonline"}>
+        <div className="card componnet1">
+          <div className="componnet">
             <div className="col-md-4">
               <img
+                style={{
+                  height: "100px",
+                  width: "100px",
+                }}
                 src="/random.jpg"
                 className="img-fluid rounded-start"
                 alt="Play Online"
