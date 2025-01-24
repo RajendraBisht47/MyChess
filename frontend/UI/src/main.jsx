@@ -7,6 +7,7 @@ import Login from "./components/Login.jsx";
 import Home from "./components/Home.jsx";
 import OnlinePlayers from "./components/OnlinePlayers.jsx";
 import Game from "./components/Game.jsx";
+import GameOnline from "./components/GameOnline.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login></Login> },
       { path: "/onlineplayer", element: <OnlinePlayers></OnlinePlayers> },
       { path: "/game", element: <Game></Game> },
+      { path: "/gameonline", element: <GameOnline></GameOnline> },
     ],
   },
 ]);
