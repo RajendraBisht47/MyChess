@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { socket } from "./Home";
-import { useNavigate } from "react-router-dom"; // Importing useNavigate for redirection
+import { useNavigate } from "react-router-dom";
 import "./css/Game.css";
 import { ContextUser } from "../store/userData";
 
@@ -10,7 +10,7 @@ function Game() {
   const [step, setStep] = useState(2);
   const [holdpiece, setholdpiece] = useState("");
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // For redirection
+  const navigate = useNavigate();
 
   const initialBoard = [
     ["br", "bn", "bb", "bq", "bk", "bb", "bn", "br"],
@@ -28,11 +28,22 @@ function Game() {
   useEffect(() => {
     if (!room || !data) {
       setError("You will leave the game");
-    } else if (room.chance === data.username) {
-      setColor("white");
     }
-  }, [room, data]);
+  }, []);
+  useEffect(() => {
+    if (room.chance === data.username) {
+      //console.log(room.chance, data.username, "1");
+      setColor("white");
+    } else if (room.chance !== data.username) {
+      //console.log(room.chance, data.username, "2");
 
+      board.reverse();
+      for (let i = 0; i < board.length; i++) {
+        board[i].reverse();
+      }
+      setBoard(board);
+    }
+  }, []);
   useEffect(() => {
     socket.on("nextmove1", (obj) => {
       if (obj.sender !== socket.id) {
@@ -72,7 +83,16 @@ function Game() {
   function drop(i, j) {
     board[i][j] = holdpiece;
     setBoard([...board]);
-    socket.emit("nextmove", { board, sender: socket.id, roomName: room.room });
+    let arr = JSON.parse(JSON.stringify(board));
+    arr.reverse();
+    for (let i = 0; i < arr.length; i++) {
+      arr[i].reverse();
+    }
+    socket.emit("nextmove", {
+      board: arr,
+      sender: socket.id,
+      roomName: room.room,
+    });
   }
 
   return (
@@ -98,11 +118,7 @@ function Game() {
               }}
             >
               {piece && (
-                <img
-                  src={`/pieces/${piece}.png`}
-                  alt=""
-                  className="piece"
-                />
+                <img src={`/pieces/${piece}.png`} alt="" className="piece" />
               )}
             </div>
           ))
