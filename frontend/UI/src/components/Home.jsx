@@ -72,7 +72,7 @@ function Home() {
               setToast(false);
             }}
           >
-            <img src="../public/reject.png" alt="" height="30px" />
+            <img src="/reject.png" alt="" height="30px" />
           </button>
           <button
             type="button"
@@ -81,7 +81,7 @@ function Home() {
               accepted(invite);
             }}
           >
-            <img src="../public/accept.png" alt="" height="30px" />
+            <img src="/accept.png" alt="" height="30px" />
           </button>
         </div>
       ) : null}
@@ -91,7 +91,7 @@ function Home() {
             <div className="col-md-4">
               <img
                 style={{ padding: "5px" }}
-                src="../public/friend.png"
+                src="/friend.png"
                 className="img-fluid rounded-start"
                 alt="Invite Friend"
               />
@@ -110,7 +110,7 @@ function Home() {
           <div className="row g-0">
             <div className="col-md-4">
               <img
-                src="../public/random.jpg"
+                src="/random.jpg"
                 className="img-fluid rounded-start"
                 alt="Play Online"
               />
