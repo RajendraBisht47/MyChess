@@ -42,7 +42,7 @@ function DataProvider({ children }) {
       document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
     });
 
-    window.location.href = "/login";
+    window.location.href = "/";
   }
 
   const [room, setRoom] = useState(null);
