@@ -6,17 +6,33 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   flex-direction: column;
   justify-content: flex-start;
 }
 .containerBox {
   margin-top: 50px;
   text-decoration: none;
+  padding: 0;
+  width: max-content;
 }
 
 .close {
   background: transparent;
   border: none;
   margin-left: 10px;
+}
+.componnet {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 150px;
+}
+.componnet1 {
+  border-radius: 20px;
+  border: 2px solid rgb(0, 252, 63);
+  padding: 0px;
+  margin: 0%;
 }
