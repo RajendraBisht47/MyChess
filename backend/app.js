@@ -8,6 +8,8 @@ const cookiesParser = require("cookie-parser");
 
 //queue
 var onlineUsers = {};
+var onlineUsers1 = [];
+
 //
 
 //db
@@ -21,12 +23,13 @@ const auth = require("./authentication/auth");
 //routes
 const userRoutes = require("./routes/user");
 //end
-
+//"https://mychess-mj02.onrender.com"
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: "https://mychess-mj02.onrender.com",
+    methods: ["GET", "POST"],
     credentials: true,
   },
 });
@@ -90,6 +93,38 @@ io.on("connection", (socket) => {
       sender: obj.sender,
     });
   });
+
+  //onlineGames
+  socket.on("onlinegame", (e) => {
+    onlineUsers1.push([e.id, e.username]);
+    // console.log(onlineUsers1);
+    if (onlineUsers1.length >= 2) {
+      const user1 = onlineUsers1.pop();
+      const user2 = onlineUsers1.pop();
+
+      const accept = user1[0];
+      const request = user2[0];
+      const roomName = `room-${accept}-${request}`;
+      socket.join(roomName);
+      io.to(request).socketsJoin(roomName);
+
+      io.to(roomName).emit("gameStarted", {
+        room: roomName,
+        players: {
+          player1: {
+            id: accept,
+            name: onlineUsers[accept],
+          },
+          player2: {
+            id: request,
+            name: onlineUsers[request],
+          },
+        },
+        chance: onlineUsers[accept],
+      });
+    }
+  });
+  //end
 });
 //end
 
@@ -104,8 +139,6 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 app.use(cookiesParser());
 //end
-
-app.get("/", auth, (req, res) => {});
 
 app.use("/user", userRoutes);
 
