@@ -99,7 +99,7 @@ function Game() {
             >
               {piece && (
                 <img
-                  src={`../public/pieces/${piece}.png`}
+                  src={`/pieces/${piece}.png`}
                   alt=""
                   className="piece"
                 />
